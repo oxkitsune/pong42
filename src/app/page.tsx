@@ -1,16 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { PlusCircle } from "lucide-react";
 
 import { AddMatchDialog } from "@/components/add-match-dialog";
 import { MatchHistory } from "@/components/match-history";
 import { PlayerRankings } from "@/components/player-rankings";
-import { Button } from "@/components/ui/button";
+import TableTennisPaddle from "@/components/table-tennis-paddle";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import { FaTableTennis } from "react-icons/fa";
+import SignIn from "@/components/sign-in";
 
 // Initial sample data
 const initialPlayers = [
@@ -96,13 +96,10 @@ export default function HomePage() {
     <div className="container mx-auto p-4 space-y-4">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold flex items-center gap-2">
-          <FaTableTennis className="h-8 w-8" />
+          <TableTennisPaddle className="h-8 w-8" />
           Pong42 League
         </h1>
-        <Button onClick={() => setIsDialogOpen(true)}>
-          <PlusCircle className="mr-2 h-4 w-4" />
-          Log in
-        </Button>
+        <SignIn />
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
