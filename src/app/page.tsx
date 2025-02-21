@@ -9,7 +9,6 @@ import TableTennisPaddle from "@/components/table-tennis-paddle";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import { FaTableTennis } from "react-icons/fa";
 import SignIn from "@/components/sign-in";
 
 // Initial sample data
