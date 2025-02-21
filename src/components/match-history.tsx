@@ -1,6 +1,6 @@
 import { CalendarDays } from "lucide-react";
 
-import { ScrollArea } from "@/app/components/ui/scroll-area";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface Match {
   id: number;
