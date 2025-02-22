@@ -21,8 +21,9 @@ export function MatchHistory({ matches }: MatchHistoryProps) {
       month: "short",
       day: "numeric",
       year: "numeric",
-      hour: "numeric",
-      minute: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
     });
   };
 
@@ -57,9 +58,9 @@ export function MatchHistory({ matches }: MatchHistoryProps) {
                 </div>
               </div>
             </div>
-            <div className="flex justify-end items-center gap-1 -mt-1">
-              <CalendarDays className="h-3 w-3 text-muted-foreground/50" />
-              <time className="text-[10px] text-muted-foreground/50">
+            <div className="flex items-center justify-center gap-1 mt-2">
+              <CalendarDays className="h-3 w-3 text-muted-foreground" />
+              <time className="text-[10px] text-muted-foreground">
                 {formatDate(match.date)}
               </time>
             </div>
