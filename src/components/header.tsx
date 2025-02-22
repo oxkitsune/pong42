@@ -1,8 +1,13 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import TableTennisPaddle from "./table-tennis-paddle";
+import { auth } from "@/auth";
+import { Profile } from "./profile-button";
 
-export default function Header() {
+export default async function Header() {
+  const user = await auth();
+  const isLoggedIn = !!user;
+
   return (
     <header className="border-b">
       <div className="container flex h-16 items-center justify-between px-4 md:px-8 max-w-screen-2xl mx-auto">
@@ -11,11 +16,15 @@ export default function Header() {
           <span className="whitespace-nowrap">pong42</span>
         </h1>
         <div className="flex-shrink-0">
-          <Link href="/login">
-            <Button variant="outline" className="whitespace-nowrap">
-              Login
-            </Button>
-          </Link>
+          {isLoggedIn ? (
+            <Profile />
+          ) : (
+            <Link href="/login">
+              <Button variant="outline" className="whitespace-nowrap">
+                Login
+              </Button>
+            </Link>
+          )}
         </div>
       </div>
     </header>
