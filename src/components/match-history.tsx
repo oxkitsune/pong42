@@ -21,107 +21,50 @@ export function MatchHistory({ matches }: MatchHistoryProps) {
       month: "short",
       day: "numeric",
       year: "numeric",
-    });
-  };
-
-  const parseGames = (score: string, isReversed: boolean) => {
-    return score.split(", ").map((game) => {
-      const [score1, score2] = game.split("-").map(Number);
-      // If players are reversed, we need to reverse the scores too
-      const [leftScore, rightScore] = isReversed
-        ? [score2, score1]
-        : [score1, score2];
-      const isLeftWinner = isReversed
-        ? rightScore > leftScore
-        : leftScore > rightScore;
-      return { leftScore, rightScore, isLeftWinner };
+      hour: "numeric",
+      minute: "numeric",
     });
   };
 
   return (
     <ScrollArea className="h-[300px] pr-4">
       <div className="space-y-0.5">
-        {matches.map((match, index) => {
-          // Randomly decide if we should reverse the player positions
-          const isReversed = index % 2 === 0;
-          const [leftPlayer, rightPlayer] = isReversed
-            ? [match.loser, match.winner]
-            : [match.winner, match.loser];
-
-          return (
-            <div
-              key={match.id}
-              className={`p-3 transition-colors ${
-                index % 2 === 0 ? "bg-muted/50" : ""
-              } space-y-3`}
-            >
-              <div className="grid grid-cols-[1fr,auto,1fr] items-center gap-2 text-sm">
-                <div className="flex justify-center">
-                  <span
-                    className={`inline-flex items-center gap-1 ${
-                      leftPlayer === match.winner
-                        ? "font-medium text-primary"
-                        : "text-muted-foreground"
-                    }`}
-                  >
-                    {leftPlayer}
-                    {leftPlayer === match.winner && (
-                      <Trophy className="h-3 w-3 text-yellow-500" />
-                    )}
+        {matches.map((match, index) => (
+          <div
+            key={match.id}
+            className={`p-2 transition-colors ${
+              index % 2 === 0 ? "bg-muted/50" : ""
+            } space-y-2`}
+          >
+            <div className="grid grid-cols-[1fr,auto,1fr] items-center gap-2 text-sm">
+              <div className="flex flex-col items-center col-span-3">
+                <div className="flex items-center justify-center gap-2 mb-1">
+                  <span className="text-lg font-bold text-primary">
+                    {match.score.split("-")[0]}
+                  </span>
+                  <span className="text-lg text-muted-foreground">-</span>
+                  <span className="text-lg text-muted-foreground">
+                    {match.score.split("-")[1]}
                   </span>
                 </div>
-                <span className="text-muted-foreground text-xs">vs</span>
-                <div className="flex justify-center">
-                  <span
-                    className={`inline-flex items-center gap-1 ${
-                      rightPlayer === match.winner
-                        ? "font-medium text-primary"
-                        : "text-muted-foreground"
-                    }`}
-                  >
-                    {rightPlayer}
-                    {rightPlayer === match.winner && (
-                      <Trophy className="h-3 w-3 text-yellow-500" />
-                    )}
+                <div className="flex items-center justify-center gap-4">
+                  <span className="inline-flex items-center gap-1 font-medium text-primary">
+                    {match.winner}
+                    <Trophy className="h-3 w-3 text-yellow-500" />
                   </span>
+                  <span className="text-muted-foreground text-xs">vs</span>
+                  <span className="text-muted-foreground">{match.loser}</span>
                 </div>
-              </div>
-              <div className="grid grid-cols-[1fr,auto,1fr] gap-2">
-                {parseGames(match.score, isReversed).map((game, index) => (
-                  <React.Fragment key={index}>
-                    <span
-                      className={
-                        game.isLeftWinner
-                          ? "font-medium text-primary text-xs text-center"
-                          : "text-muted-foreground text-xs text-center"
-                      }
-                    >
-                      {game.leftScore}
-                    </span>
-                    <span className="text-[10px] text-muted-foreground/50 text-center">
-                      Game {index + 1}
-                    </span>
-                    <span
-                      className={
-                        !game.isLeftWinner
-                          ? "font-medium text-primary text-xs text-center"
-                          : "text-muted-foreground text-xs text-center"
-                      }
-                    >
-                      {game.rightScore}
-                    </span>
-                  </React.Fragment>
-                ))}
-              </div>
-              <div className="flex justify-end items-center gap-1">
-                <CalendarDays className="h-3 w-3 text-muted-foreground/50" />
-                <time className="text-[10px] text-muted-foreground/50">
-                  {formatDate(match.date)}
-                </time>
               </div>
             </div>
-          );
-        })}
+            <div className="flex justify-end items-center gap-1 -mt-1">
+              <CalendarDays className="h-3 w-3 text-muted-foreground/50" />
+              <time className="text-[10px] text-muted-foreground/50">
+                {formatDate(match.date)}
+              </time>
+            </div>
+          </div>
+        ))}
       </div>
     </ScrollArea>
   );
