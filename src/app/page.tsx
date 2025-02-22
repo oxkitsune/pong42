@@ -6,7 +6,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <div className="container mx-auto p-4 space-y-4">
+      <div className="container mx-auto px-0 sm:p-4 space-y-4">
         <div className="grid gap-4 md:grid-cols-2">
           <StatsCard />
           <ActivityCard />
