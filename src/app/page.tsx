@@ -8,8 +8,8 @@ import { PlayerRankings } from "@/components/player-rankings";
 import TableTennisPaddle from "@/components/table-tennis-paddle";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
-import SignIn from "@/components/sign-in";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 // Initial sample data
 const initialPlayers = [
@@ -98,7 +98,9 @@ export default function HomePage() {
           <TableTennisPaddle className="h-8 w-8" />
           Pong42 League
         </h1>
-        <SignIn />
+        <Link href="/login">
+          <Button size="lg">Login</Button>
+        </Link>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
